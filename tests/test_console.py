@@ -12,9 +12,10 @@ from console import HBNBCommand
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-from tests import clear_stream
 
-
+def clear_stream(st):
+    print(st)
+    
 class TestHBNBCommand(unittest.TestCase):
     """Represents the test class for the HBNBCommand class.
     """
