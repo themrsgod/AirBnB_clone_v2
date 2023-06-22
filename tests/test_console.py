@@ -5,6 +5,7 @@ import json
 import MySQLdb
 import os
 import unittest
+import sqlalchemy
 from io import StringIO
 from unittest.mock import patch
 
