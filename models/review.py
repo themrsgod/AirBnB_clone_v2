@@ -1,18 +1,24 @@
-#!/usr/bin/python3
-"""Defines the Review class."""
-from models.base_model import BaseModel
+#!/usr/bin/python
+""" holds class Review"""
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey
 
 
-class Review(BaseModel):
-    """
-    A model that represents a review of a place.
+class Review(BaseModel, Base):
+    """Representation of Review """
+    if models.storage_type == 'db':
+        __tablename__ = 'reviews'
+        place_id = Column(String(60), ForeignKey('places.id'), nullable=False)
+        user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
+        text = Column(String(1024), nullable=False)
+    else:
+        place_id = ""
+        user_id = ""
+        text = ""
 
-    Attributes:
-        place_id (str): The id of the place being reviewed.
-        user_id (str): The id of the user who wrote the review.
-        text (str): The text content of the review.
-    """
-
-    place_id: str = ""
-    user_id: str = ""
-    text: str = ""
+    def __init__(self, *args, **kwargs):
+        """initializes Review"""
+        super().__init__(*args, **kwargs)

@@ -1,20 +1,29 @@
 #!/usr/bin/python3
-"""Defines the User class."""
-from models.base_model import BaseModel
+""" holds class User"""
+import models
+from models.base_model import BaseModel, Base
+from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 
 
-class User(BaseModel):
-    """
-    A model that represents a user account.
+class User(BaseModel, Base):
+    """Representation of a user """
+    if models.storage_type == 'db':
+        __tablename__ = 'users'
+        email = Column(String(128), nullable=False)
+        password = Column(String(128), nullable=False)
+        first_name = Column(String(128), nullable=True)
+        last_name = Column(String(128), nullable=True)
+        places = relationship("Place", backref="user")
+        reviews = relationship("Review", backref="user")
+    else:
+        email = ""
+        password = ""
+        first_name = ""
+        last_name = ""
 
-    Attributes:
-        email (str): The email address associated with the user account.
-        password (str): The password used to authenticate the user account.
-        first_name (str): The first name of the user.
-        last_name (str): The last name of the user.
-    """
-
-    email: str = ""
-    password: str = ""
-    first_name: str = ""
-    last_name: str = ""
+    def __init__(self, *args, **kwargs):
+        """initializes user"""
+        super().__init__(*args, **kwargs)
