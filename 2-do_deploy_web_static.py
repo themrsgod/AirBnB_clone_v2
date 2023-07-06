@@ -1,19 +1,18 @@
 #!/usr/bin/python3
 """
-AirBnB clone - Deploy static, task 2. Deploy archive!
+AirBnB clone - Deploy static, Deploy archive!
 """
 from datetime import datetime
 from fabric.api import *
 import shlex
 import os
 
-env.hosts = ['54.83.128.139', '34.207.64.39']
+env.hosts = ['18.214.88.235', '100.25.103.162']
 env.user = 'ubuntu'
 
 
 def do_deploy(archive_path):
-    """ Distributes a .tgz archive from the contents of `web_static/` in AirBnB
-    clone repo to the web servers
+    """ Distributes archive to the web servers
     Retruns:
         (bool): `True` if all operations successful, `False` otherwise
     """
